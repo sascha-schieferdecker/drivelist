@@ -1,5 +1,5 @@
 {
-  "name": "drivelist",
+  "name": "tdy-drivelist",
   "version": "9.2.4",
   "description": "List all connected drives in your computer, in all major operating systems",
   "main": "js/index.js",
