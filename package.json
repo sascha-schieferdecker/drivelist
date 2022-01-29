@@ -3,11 +3,11 @@
   "version": "9.2.4",
   "description": "List all connected drives in your computer, in all major operating systems",
   "main": "js/index.js",
-  "homepage": "https://github.com/balena-io-modules/drivelist",
+  "homepage": "https://github.com/tangdaoyuan/drivelist.git",
   "gypfile": true,
   "repository": {
     "type": "git",
-    "url": "git://github.com/balena-io-modules/drivelist.git"
+    "url": "https://github.com/tangdaoyuan/drivelist.git"
   },
   "keywords": [
     "disk",
@@ -32,7 +32,7 @@
     "build-ts": "tsc",
     "rebuild": "node-gyp rebuild",
     "install": "prebuild-install || node-gyp rebuild",
-    "prebuild-release": "prebuild --all --strip",
+    "prebuild-release": "prebuild -t 5.0.13 -r electron --strip --verbose",
     "prepublishOnly": "npm run build-ts && npm run readme"
   },
   "author": "Juan Cruz Viotti <juan@balena.io>",
