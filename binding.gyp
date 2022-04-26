@@ -2,14 +2,22 @@
   "targets": [
     {
       "target_name": "drivelist",
-      "include_dirs" : [
-        "<!(node -e \"require('nan')\")",
-        "."
+      "include_dirs": [
+          "<!(node -p \"require('node-addon-api').include_dir\")",
+          "."
+      ],
+      "dependencies": [
+        "<!(node -p \"require('node-addon-api').gyp\")"
       ],
       "sources": [
         "src/drivelist.cpp",
         "src/device-descriptor.cpp",
       ],
+      "defines": [
+        "NAPI_CPP_EXCEPTIONS"
+      ],
+      'cflags!': [ '-fno-exceptions' ],
+      'cflags_cc!': [ '-fno-exceptions' ],
       "msvs_settings": {
         "VCLinkerTool": {
           "SetChecksum": "true"
@@ -24,12 +32,14 @@
       "conditions": [
         [ 'OS=="mac"', {
           "xcode_settings": {
+            "GCC_ENABLE_CPP_EXCEPTIONS": "yes",
             "OTHER_CPLUSPLUSFLAGS": [
               "-stdlib=libc++"
             ],
             "OTHER_LDFLAGS": [
               "-stdlib=libc++"
-            ]
+            ],
+            "MACOSX_DEPLOYMENT_TARGET":"10.10"
           },
           "sources": [
             "src/darwin/list.mm",
@@ -54,7 +64,10 @@
         [ 'OS=="linux"', {
           "sources": [
             "src/linux/list.cpp"
-          ]
+          ],
+          "cflags_cc": [
+            "-fexceptions"
+          ],
         }]
       ]
     }
